@@ -19,21 +19,21 @@
             "title": "ROCK",
             "verb": "gameresponse",
             "fallback": "Action.Submit",
-            "data" : {"user":"${aadObjectId}","gameId":"${gameId}","reply":"rock"}
+            "data" : {"aadObjectId":"${aadObjectId}","gameId":"${gameId}","reply":"rock"}
         },
         {
             "type": "Action.Execute",
             "title": "PAPER",
             "verb": "gameresponse",
             "fallback": "Action.Submit",
-            "data" : {"user":"${aadObjectId}","gameId":"${gameId}","reply":"paper"}
+            "data" : {"aadObjectId":"${aadObjectId}","gameId":"${gameId}","reply":"paper"}
         },
         {
             "type": "Action.Execute",
             "title": "SCISSORS",
             "verb": "gameresponse",
             "fallback": "Action.Submit",
-            "data" : {"user":"${aadObjectId}","gameId":"${gameId}","reply":"scissors"}
+            "data" : {"aadObjectId":"${aadObjectId}","gameId":"${gameId}","reply":"scissors"}
         }
 
     ],

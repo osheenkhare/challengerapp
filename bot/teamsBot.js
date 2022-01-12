@@ -78,13 +78,14 @@ class TeamsBot extends TeamsActivityHandler {
   async onAdaptiveCardInvoke(context, invokeValue) {
      // The verb "userlike" is sent from the Adaptive Card defined in adaptiveCards/learn.json
      if(invokeValue.action.verb==="gameresponse"){
+      console.log(context.activity.replyToId)
       const card = cardTools.AdaptiveCards.declareWithoutData(rawThankyouCard).render();
       await context.updateActivity({
         type: "message",
         id: context.activity.replyToId,
         attachments: [CardFactory.adaptiveCard(card)],
       });
-      await Game.captureResponses(invokeValue.action.data)
+      await Game.captureResponses(context, invokeValue.action.data)
      }
      return { statusCode: 200 };
   }

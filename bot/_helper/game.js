@@ -38,16 +38,24 @@ class Game {
 
         var responsedata={"response_user":userset}
         const card = cardTools.AdaptiveCards.declare(rawResponseCard).render(responsedata);
-        var k = await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
-        console.log(k)
+        var cardId = await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
+        
+        var resid = {"gameId":this.gameId, "cardId":cardId["id"]}
+        Database.saveResponseId(resid)
     }
 
     static gameIdGenerator(){
        return (Math.random() + 1).toString(36).substring(7);
     }
 
-    static async captureResponses(response){
+    static async captureResponses(context,response){
         Database.updateGameResponses(response)
+        /*const card = cardTools.AdaptiveCards.declareWithoutData(rawThankyouCard).render();
+        await context.updateActivity({
+            type: "message",
+            id: context.activity.replyToId,
+            attachments: [CardFactory.adaptiveCard(card)],
+        });*/
     }
 }
 
