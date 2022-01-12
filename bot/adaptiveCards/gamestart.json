@@ -1,0 +1,42 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "text": "GAME BEGINS"
+        },
+        {
+            "type": "TextBlock",
+            "text": "${name}, Please select your choice.",
+            "wrap": true
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Execute",
+            "title": "ROCK",
+            "verb": "gameresponse",
+            "fallback": "Action.Submit",
+            "data" : {"user":"${aadObjectId}","gameId":"${gameId}","reply":"rock"}
+        },
+        {
+            "type": "Action.Execute",
+            "title": "PAPER",
+            "verb": "gameresponse",
+            "fallback": "Action.Submit",
+            "data" : {"user":"${aadObjectId}","gameId":"${gameId}","reply":"paper"}
+        },
+        {
+            "type": "Action.Execute",
+            "title": "SCISSORS",
+            "verb": "gameresponse",
+            "fallback": "Action.Submit",
+            "data" : {"user":"${aadObjectId}","gameId":"${gameId}","reply":"scissors"}
+        }
+
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5"
+}
