@@ -1,6 +1,5 @@
 var azure = require('azure-storage');
-var account = "temendeiudiuw"
-var key = "DHL+IzkxIdvg6o5MroWnuOrw2WtlAT5rXLsiFezZTDoD5p2NdzH9mxTkWlsdzyzRtF72j8sGU/aXe1iqn9fmOw=="
+
 var tableSvc = azure.createTableService(account, key);
 
 class Database{
@@ -63,8 +62,6 @@ class Database{
 
     static saveResponseId(resid){
 
-        console.log(resid)
-
         tableSvc.createTableIfNotExists('response', function(error, result, response){
             if(!error){
                 
@@ -87,6 +84,14 @@ class Database{
     }
 
     static getResponseId(resid){
+        console.log(resid)
+
+        tableSvc.retrieveEntity('response',resid, resid, function(error, result, response){
+            if(!error){
+              // result contains the entity
+              console.log(result)        
+            }
+        });
 
     }
 }

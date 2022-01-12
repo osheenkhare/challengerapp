@@ -50,6 +50,7 @@ class Game {
 
     static async captureResponses(context,response){
         Database.updateGameResponses(response)
+        var resid = Database.getResponseId(response["gameId"])
         /*const card = cardTools.AdaptiveCards.declareWithoutData(rawThankyouCard).render();
         await context.updateActivity({
             type: "message",

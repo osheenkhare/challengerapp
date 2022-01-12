@@ -2,8 +2,6 @@ console.log("testing")
 
 var azure = require('azure-storage');
 
-account = "temendeiudiuw"
-key = "DHL+IzkxIdvg6o5MroWnuOrw2WtlAT5rXLsiFezZTDoD5p2NdzH9mxTkWlsdzyzRtF72j8sGU/aXe1iqn9fmOw=="
 
 var tableSvc = azure.createTableService(account, key);
 
