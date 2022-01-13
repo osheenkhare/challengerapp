@@ -1,5 +1,6 @@
 var azure = require('azure-storage');
-
+var account = "temendeiudiuw"
+var key = "DHL+IzkxIdvg6o5MroWnuOrw2WtlAT5rXLsiFezZTDoD5p2NdzH9mxTkWlsdzyzRtF72j8sGU/aXe1iqn9fmOw=="
 var tableSvc = azure.createTableService(account, key);
 
 class Database{
@@ -12,7 +13,6 @@ class Database{
     }
 
     static getUsers(){
-
     }
 
     static initGame(memberInfo){
@@ -83,16 +83,37 @@ class Database{
         });
     }
 
-    static getResponseId(resid){
-        console.log(resid)
+    static async getResponseId(resid1){
+        var resid = (resid1)
+        return new Promise((resolve)=>{
+            tableSvc.retrieveEntity('response',resid, resid, function(error, result, response){
+                resolve(result)
+            })
+        })
+    }
 
-        tableSvc.retrieveEntity('response',resid, resid, function(error, result, response){
-            if(!error){
-              // result contains the entity
-              console.log(result)        
-            }
-        });
+    static async getGameUserResponses(gameId1){
+        var gameId=(gameId1)
+        return new Promise((resolve)=>{
+            var userset=[]
 
+            var query = new azure.TableQuery()
+            .top(10)
+            .where('PartitionKey eq ?', gameId);
+
+            tableSvc.queryEntities('servicerecord', query, null, function(error, result, response){
+                if(!error){
+                    // result contains the entity
+                    result.entries.forEach(element=>{
+                        var name = "" + element["name"]["_"]
+                        var reply = "" + element["reply"]["_"]
+                        userset.push([name,reply])
+                        //console.log(userset)
+                    })
+                    resolve(userset)
+                }
+            });
+        })
     }
 }
 
